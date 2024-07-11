@@ -1,0 +1,79 @@
+.hero {
+  width: 100%;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  align-items: center;
+  gap: 20px;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h2 {
+      font-size: 50px;
+      font-style: normal;
+      font-weight: bold;
+      line-height: normal;
+    }
+
+    h1 {
+      font-size: 70px;
+      font-style: normal;
+      font-weight: bold;
+      line-height: normal;
+      background: linear-gradient(94deg, #2203ff 33.29%, #c40d60 67.01%);
+      background-clip: text;
+      color: transparent;
+    }
+
+    p {
+      color: #cecece;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    button {
+      width: fit-content;
+    }
+  }
+
+  &__movie {
+    width: 95%;
+    height: 80vh;
+    box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.25);
+    border-radius: 5px;
+
+    img {
+      width: 100%;
+      height: 65%;
+      object-fit: cover;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      overflow: hidden;
+    }
+
+    &-descr {
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      h2 {
+        font-size: 26px;
+      }
+
+      p {
+        opacity: .7;
+      }
+
+      div {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+    }
+  }
+}
