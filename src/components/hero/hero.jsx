@@ -14,6 +14,9 @@ class Hero extends React.Component {
     };
 
     this.movieService = new MovieService();
+  }
+
+  componentDidMount() {
     this.getMovie();
   }
 
