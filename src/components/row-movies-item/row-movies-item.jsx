@@ -1,8 +1,8 @@
 import "./row-movies-item.scss";
 
-const RowMoviesItem = ({ movie, onToggleOpen }) => {
+const RowMoviesItem = ({ movie, onOpen }) => {
   return (
-    <div className="movieitem" onClick={onToggleOpen}>
+    <div className="movieitem" onClick={() => onOpen(movie.id)}>
       <img src={movie.poster_path} alt={movie.title} />
 
       <h2>
