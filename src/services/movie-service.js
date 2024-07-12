@@ -31,6 +31,22 @@ class MovieService {
       `${this._apiBase}/movie/${id}?${this._apiLng}&${this._apiKey}`
     );
   };
+
+  getRandomMovie = async () => {
+    const res = await this.getPopularMovies();
+    const movie = res.results[Math.floor(Math.random() * res.results.length)];
+    return this._transformMovie(movie);
+  };
+
+  _transformMovie = (movie) => {
+    return {
+      name: movie.original_title,
+      description: movie.overview,
+      backdrop_path: `${this._apiImg}${movie.backdrop_path}`,
+      poster_path: `${this._apiImg}${movie.poster_path}`,
+      id: movie.id,
+    };
+  };
 }
 
 export default MovieService;
