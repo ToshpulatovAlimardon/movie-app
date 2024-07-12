@@ -1,16 +1,16 @@
 import React from "react";
 import MovieService from "../../services/movie-service";
 import "./hero.scss";
+import Spinner from "../spinner/spinner";
+import Error from "../error/error";
 
 class Hero extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: null,
-      description: null,
-      backdrop_path: null,
-      poster_path: null,
-      id: null,
+      movie: {},
+      loading: true,
+      error: false,
     };
 
     this.movieService = new MovieService();
@@ -18,11 +18,19 @@ class Hero extends React.Component {
   }
 
   getMovie = () => {
-    this.movieService.getRandomMovie().then((res) => this.setState(res));
+    this.movieService
+      .getRandomMovie()
+      .then((res) => this.setState({ movie: res }))
+      .catch(() => this.setState({ error: true }))
+      .finally(() => this.setState({ loading: false }));
   };
 
   render() {
-    const { name, description, backdrop_path } = this.state;
+    const { movie, loading, error } = this.state;
+
+    const errorContent = error ? <Error /> : null;
+    const loadingContent = loading ? <Spinner /> : null;
+    const content = !(error || loading) ? <Content movie={movie} /> : null;
 
     return (
       <div className="hero">
@@ -38,20 +46,9 @@ class Hero extends React.Component {
           <button className="btn btn-primary">Details</button>
         </div>
         <div className="hero__movie">
-          <img src={backdrop_path} alt="img" />
-
-          <div className="hero__movie-descr">
-            <h2>{name}</h2>
-            <p>
-              {description && description.length >= 250
-                ? `${description.slice(0, 250)}...`
-                : description}
-            </p>
-            <div>
-              <button className="btn btn-secondary">Random movie</button>
-              <button className="btn btn-primary">Details</button>
-            </div>
-          </div>
+          {errorContent}
+          {loadingContent}
+          {content}
         </div>
       </div>
     );
@@ -59,3 +56,24 @@ class Hero extends React.Component {
 }
 
 export default Hero;
+
+const Content = ({ movie }) => {
+  return (
+    <>
+      <img src={movie.backdrop_path} alt="img" />
+
+      <div className="hero__movie-descr">
+        <h2>{movie.name}</h2>
+        <p>
+          {movie.description && movie.description.length >= 250
+            ? `${movie.description.slice(0, 250)}...`
+            : movie.description}
+        </p>
+        <div>
+          <button className="btn btn-secondary">Random movie</button>
+          <button className="btn btn-primary">Details</button>
+        </div>
+      </div>
+    </>
+  );
+};
