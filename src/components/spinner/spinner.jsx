@@ -1,11 +1,11 @@
-import "./spinner.scss";
+import "./spinner.scss"
 
-const Spinner = () => {
-  return (
-    <div className="center">
-      <div className="loader"></div>
-    </div>
-  );
-};
+const Spinner = ({width = "50px"}) => {
+	return (
+		<div className='center'>
+			<div className='loader' style={{width}} />
+		</div>
+	)
+}
 
-export default Spinner;
+export default Spinner

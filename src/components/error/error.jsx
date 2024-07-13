@@ -1,11 +1,11 @@
-import "./error.scss";
+import "./error.scss"
 
 const Error = () => {
-  return (
-    <div className="center">
-      <img src="/error.gif" alt="error" className="errormessage"/>
-    </div>
-  );
-};
+	return (
+		<div className='center'>
+			<img src="/error.gif" alt="error" className='errormessage' />
+		</div>
+	)
+}
 
-export default Error;
+export default Error
