@@ -7,6 +7,7 @@ import MovieInfo from "../movie-info/movie-info";
 import RowMoviesItem from "../row-movies-item/row-movies-item";
 import Spinner from "../spinner/spinner";
 import "./row-movies.scss";
+import PropTypes from "prop-types";
 
 class RowMovies extends React.Component {
   state = {
@@ -96,4 +97,9 @@ const Content = ({ movies, onOpen }) => {
       ))}
     </div>
   );
+};
+
+Content.propTypes = {
+  movies: PropTypes.array,
+  onOpen: PropTypes.func,
 };
