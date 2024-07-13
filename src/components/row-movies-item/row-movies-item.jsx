@@ -21,7 +21,7 @@ const RowMoviesItem = ({ movie, onOpen }) => {
   );
 };
 
-RowMoviesItem.PropTypes = {
+RowMoviesItem.propTypes = {
   movie: PropTypes.object,
   onOpen: PropTypes.func,
 };
