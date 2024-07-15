@@ -4,13 +4,12 @@ import Error from "../error/error";
 import Spinner from "../spinner/spinner";
 import "./movie-info.scss";
 import PropTypes from "prop-types";
+import useMovieService from "../../services/movie-service";
 
 const MovieInfo = ({ movieId }) => {
   const [movie, setMovie] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
-  const movieService = new MovieService();
+  const { getDetailedMovie, loading, error } = useMovieService();
 
   useEffect(() => {
     updateMovie();
@@ -21,13 +20,7 @@ const MovieInfo = ({ movieId }) => {
       return;
     }
 
-    setLoading(true);
-
-    movieService
-      .getDetailedMovie(movieId)
-      .then((res) => setMovie(res))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+    getDetailedMovie(movieId).then((res) => setMovie(res));
   };
 
   const initialContent = movie || loading || error ? null : <Spinner />;
