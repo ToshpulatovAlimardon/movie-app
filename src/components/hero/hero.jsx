@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import MovieService from "../../services/movie-service";
 import Error from "../error/error";
 import Spinner from "../spinner/spinner";
 import "./hero.scss";
 import PropTypes from "prop-types";
 import useMovieService from "../../services/movie-service";
+import { useNavigate } from "react-router";
 
 const Hero = () => {
   const [movie, setMovie] = useState(null);
@@ -55,6 +55,8 @@ const Hero = () => {
 export default Hero;
 
 const Content = ({ movie }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <img src={movie.backdrop_path} alt="img" />
@@ -66,7 +68,12 @@ const Content = ({ movie }) => {
             ? `${movie.description.slice(0, 250)}...`
             : movie.description}
         </p>
-        <button className="btn btn-primary">Details</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => navigate(`/movie/${movie.id}`)}
+        >
+          Details
+        </button>
       </div>
     </>
   );

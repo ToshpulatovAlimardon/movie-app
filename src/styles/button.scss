@@ -31,4 +31,16 @@
 			border-color: rgba(255, 255, 255, 0.1);
 		}
 	}
+	
+	&-light {
+		background-color: #000;
+		border: 1px solid #000;
+		color: #fff;
+		
+		&:hover {
+			color: #fff;
+			background-color: #2e2e2e;
+			border-color: rgba(255, 255, 255, 0.1);
+		}
+	}
 }
