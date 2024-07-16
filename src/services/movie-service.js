@@ -34,7 +34,7 @@ const useMovieService = () => {
 
   const getRandomMovie = async () => {
     const res = await getPopularMovies();
-    const movie = res[Math.floor(Math.random() * res.results.length)];
+    const movie = res[Math.floor(Math.random() * res.length)];
     return movie;
   };
 

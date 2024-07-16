@@ -1,21 +1,22 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useMovieService from "../../services/movie-service";
 import Error from "../error/error";
 import Spinner from "../spinner/spinner";
 import "./hero.scss";
-import PropTypes from "prop-types";
-import useMovieService from "../../services/movie-service";
-import { useNavigate } from "react-router";
 
 const Hero = () => {
   const [movie, setMovie] = useState(null);
 
-  const { getRandomMovie, error, loading } = useMovieService();
+  const { getRandomMovie, error, loading, clearError } = useMovieService();
 
   useEffect(() => {
     updateMovie();
   }, []);
 
-  const updateMovie = () => {
+  const updateMovie = async () => {
+    clearError();
     getRandomMovie().then((res) => setMovie(res));
   };
 
@@ -37,7 +38,6 @@ const Hero = () => {
           optio perferendis error earum.
         </p>
         <div>
-          <button className="btn btn-primary">Details</button>
           <button className="btn btn-secondary" onClick={updateMovie}>
             Random Movie
           </button>
@@ -80,10 +80,5 @@ const Content = ({ movie }) => {
 };
 
 Content.propTypes = {
-  movie: {
-    backdrop_path: PropTypes.string,
-    name: PropTypes.string,
-    description: PropTypes.string,
-    id: PropTypes.number,
-  },
+  movie: PropTypes.object,
 };

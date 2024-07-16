@@ -1,22 +1,28 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router";
 import Navbar from "../navbar/navbar";
-import HomePage from "../../pages/home-page";
-import DetailedPage from "../../pages/detailed-page";
-import NotFoundPage from "../../pages/not-found-page";
-import TrandingPage from "../../pages/tranding-page";
-import PopularPage from "../../pages/popular-page";
+import Spinner from "../spinner/spinner";
+
+const NotFoundPage = lazy(() => import("../../pages/not-found-page"));
+const HomePage = lazy(() => import("../../pages/home-page"));
+const TrandingPage = lazy(() => import("../../pages/tranding-page"));
+const PopularPage = lazy(() => import("../../pages/popular-page"));
+const DetailedPage = lazy(() => import("../../pages/detailed-page"));
 
 const App = () => {
   return (
     <div className="app">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/tranding" element={<TrandingPage />} />
-        <Route path="/popular" element={<PopularPage />} />
-        <Route path="/movie/:movieId" element={<DetailedPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+
+      <Suspense fallback={<Spinner />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/tranding" element={<TrandingPage />} />
+          <Route path="/popular" element={<PopularPage />} />
+          <Route path="/movie/:movieId" element={<DetailedPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 };

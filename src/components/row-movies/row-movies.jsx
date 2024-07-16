@@ -1,14 +1,14 @@
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import { useLocation } from "react-router-dom";
+import useMovieService from "../../services/movie-service";
 import Error from "../error/error";
 import MovieInfo from "../movie-info/movie-info";
 import RowMoviesItem from "../row-movies-item/row-movies-item";
 import Spinner from "../spinner/spinner";
 import "./row-movies.scss";
-import PropTypes from "prop-types";
-import useMovieService from "../../services/movie-service";
-import { useLocation } from "react-router";
 
 const RowMovies = () => {
   const [open, setOpen] = useState(false);
@@ -18,8 +18,6 @@ const RowMovies = () => {
   const [newItemLoading, setNewItemLoading] = useState(false);
 
   const { pathname } = useLocation();
-
-  console.log(pathname);
 
   const { getTrandingMovies, getPopularMovies, loading, error } =
     useMovieService();
@@ -68,6 +66,7 @@ const RowMovies = () => {
       </div>
       {errorContent}
       {loadingContent}
+
       <Content movies={movies} onOpen={onOpen} />
 
       <div className="rowmovies__loadmore">
@@ -98,7 +97,6 @@ const Content = ({ movies, onOpen }) => {
     </div>
   );
 };
-
 Content.propTypes = {
   movies: PropTypes.array,
   onOpen: PropTypes.func,
